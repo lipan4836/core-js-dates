@@ -170,17 +170,17 @@ function formatDate(date) {
 function getCountWeekendsInMonth(month, year) {
   const dateStart = new Date(year, month - 1, 1);
   const dateEnd = new Date(year, month, 0);
-  const weekends = new Array(new Date(year, month, 0).getDate());
+  let weekends = 0;
 
-  for (let i = dateStart; i <= dateEnd; i.setDate(i.getDate() + 1)) {
-    weekends.push(new Date(i));
+  for (let day = dateStart; day <= dateEnd; day.setDate(day.getDate() + 1)) {
+    const dayOfWeek = day.getDay();
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      weekends += 1;
+    }
   }
 
-  console.log(`${dateStart}\n${dateEnd}`);
-  console.log('arr length:', weekends.length);
-  console.log(weekends);
+  return weekends;
 }
-getCountWeekendsInMonth(3, 2024);
 
 /**
  * Returns the week number of the year for a given date.
